@@ -219,7 +219,7 @@ class Auth{
     protected function getUserInfo($uid) {
         static $userinfo=array();
         if(!isset($userinfo[$uid])){
-             $userinfo[$uid]=\think\Db::name($this->_config['auth_user'])->where(array('uid'=>$uid))->find();
+             $userinfo[$uid]=\think\Db::name($this->_config['ucenter_member'])->where(array('id'=>$uid))->find();
         }
         return $userinfo[$uid];
     }
