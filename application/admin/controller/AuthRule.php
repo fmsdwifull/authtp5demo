@@ -102,6 +102,8 @@ class AuthRule extends Base{
 			return $this->error('改权限不允许编辑');
 		}
 		if(\think\Db::name('auth_rule')->where('id',$id)->delete()){
+			$this->getSidebar();
+			session('_auth_list_'.session('user_auth')['uid'].'1', null);
 			return $this->success('删除成功');
 		}else{
 			return $this->error('删除失败');
