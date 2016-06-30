@@ -1,6 +1,5 @@
 <?php
 namespace app\admin\controller;
-use think\Contoller;
 use app\admin\model\AuthRule as AuthRuleModel;
 
 class AuthRule extends Base{

@@ -1,6 +1,5 @@
 <?php
 namespace app\admin\controller;
-use think\Controller;
 use app\admin\model\AuthGroup as AuthGroupModel;
 
 class AuthGroup extends Base{

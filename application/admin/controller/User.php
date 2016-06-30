@@ -1,6 +1,5 @@
 <?php
 namespace app\admin\controller;
-use think\Controller;
 use app\admin\api\UserApi;
 
 class User extends Base{
