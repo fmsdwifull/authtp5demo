@@ -93,10 +93,8 @@ class AuthGroup extends Base{
 			if(!$id || $id == 1){
 				return $this->error('参数错误');
 			}
-			$resource = input('post.resource/a');
-			$resource = implode(',', $resource);
 			$authGroupModel = new AuthGroupModel;
-			if($authGroupModel->save(['rules'=>$resource],['id'=>$id])){
+			if($authGroupModel->isUpdate(true)->save(['rules'=>''],['id'=>$id])){
 				$this->getSidebar();
 				session('_auth_list_'.session('user_auth')['uid'].'1', null);
 				return $this->success('修改成功');

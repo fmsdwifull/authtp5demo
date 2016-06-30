@@ -7,6 +7,10 @@ class AuthGroup extends Model{
 	protected $insert = ['create_time','rules'];
 
 	protected function setRulesAttr(){
-		return '1,6,11';
+		$resource = input('post.resource/a') ? implode(',',input('post.resource/a')) : '';
+		if(!$resource){
+			$resource = '1,6,11';
+		}
+		return $resource;
 	}
 }
