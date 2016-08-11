@@ -13,5 +13,6 @@ git clone https://github.com/top-think/framework.git
 
 - 本地配置虚拟机，将虚拟机根目录指向public目录下面，访问配置的域名或者localhost，如果显示登陆页面则安装成功
 - 登陆用户名：admin 密码：123456
-
+有问题可以发邮件给我<296720094@qq.com>，TP5交流群390246240
 ![image](http://yun.topthink.com/Uploads/Editor/2016-06-25/576e0c9230e1e.png)
+
