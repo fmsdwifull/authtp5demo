@@ -1,6 +1,6 @@
 # TP5开发的AUTH权限系统
 ## 安装
-1.  下载本项目到本地
+1. 下载本项目到本地
 ```
 git clone https://github.com/ningbnii/auth_tp5.git
 ```
