@@ -18,6 +18,13 @@ class Index extends Controller{
 		if(request()->isPost()){
 			$username = input('post.username');
 			$password = input('post.password');
+			$code = input('post.code');
+			if(!$code){
+				return $this->error('请填写验证码');
+			}
+			if(!captcha_check($code)){
+				return $this->error('验证码错误');
+			}
 			if(!$username || !$password){
 				return $this->error('请填写用户名或密码');
 			}
@@ -25,8 +32,10 @@ class Index extends Controller{
 			$uid = $user->login($username, $password);
 			if($uid>0){
 				/*记录session和cookie*/
+				$group_id = \think\Db::table('auth_group_access')->field('group_id')->where('uid',$uid)->find();
 				$auth = [
 					'uid'=>$uid,
+					'group_id'=>$group_id['group_id'],
 					'username'=>$username,
 					'last_login_time'=>time(),
 				];

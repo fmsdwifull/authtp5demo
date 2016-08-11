@@ -17,6 +17,11 @@
     <link id="beyond-link" href="/assets/css/beyond.min.css" rel="stylesheet" />
     <link href="/assets/css/demo.min.css" rel="stylesheet" />
     <link href="/assets/css/animate.min.css" rel="stylesheet" />
+    <style>
+        .loginbox-textbox img{
+            width: 100%;
+        }
+    </style>
 </head>
 <!--Head Ends-->
 <!--Body-->
@@ -32,13 +37,17 @@
                 <div class="loginbox-textbox">
                     <input type="password" class="form-control" placeholder="password" name="password" />
                 </div>
+                <div class="loginbox-textbox">
+                    <input type="code" class="form-control" placeholder="验证码" name="code">
+                </div>
+                <div class="loginbox-textbox">
+                    <img src="{:captcha_src()}" alt="" onclick="this.src='{:captcha_src()}'+'?t='+Math.random()">
+                </div>
+
                 <div class="loginbox-submit">
                     <input type="submit" class="btn btn-primary btn-block" value="Login">
                 </div>
             </div>
-                <div class="logobox">
-                    <p class="text-center">业务合作QQ：296720094</p>
-                </div>
         </form>
     </div>
     <!--Basic Scripts-->
