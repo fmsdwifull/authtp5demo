@@ -143,9 +143,9 @@ class Auth{
         static $groups = array();
         if (isset($groups[$uid]))
             return $groups[$uid];
-        $user_groups = \think\Db::name($this->_config['auth_group_access'])
+        $user_groups = \think\Db::table('auth_group_access')
             ->alias('a')
-            ->join($this->_config['auth_group']." g", "g.id=a.group_id")
+            ->join("auth_group g", "g.id=a.group_id")
             ->where("a.uid='$uid' and g.status='1'")
             ->field('uid,group_id,title,rules')->select();
         $groups[$uid] = $user_groups ? $user_groups : array();
@@ -186,7 +186,7 @@ class Auth{
             'status'=>1,
         );
         //读取用户组所有权限规则
-        $rules = \think\Db::name($this->_config['auth_rule'])->where($map)->field('condition,name')->select();
+        $rules = \think\Db::table('auth_rule')->where($map)->field('condition,name')->select();
 
         //循环规则，判断结果。
         $authList = array();   //
@@ -219,7 +219,7 @@ class Auth{
     protected function getUserInfo($uid) {
         static $userinfo=array();
         if(!isset($userinfo[$uid])){
-             $userinfo[$uid]=\think\Db::name('ucenter_member')->where('id',$uid)->find();
+             $userinfo[$uid]=\think\Db::table('ucenter_member')->where('id',$uid)->find();
         }
         return $userinfo[$uid];
     }
