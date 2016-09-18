@@ -9,21 +9,17 @@ class Base extends Controller{
 			$this->redirect(url('index/index'));
 		}
 
-		$module = $this->request->module();
-		$controller = $this->request->controller();
-		$action = $this->request->action();
-
+		$activeRouter = $this->request->path();
 		$auth = new \com\Auth();
-		if(!$auth->check($module . '/' . $controller  . '/' . $action, session('user_auth')['uid'])){
+		if(!$auth->check($activeRouter, session('user_auth')['uid'])){
 			return $this->error('没有权限',url('index/index'));
 		}
+
 		if(!session('sidebar')){
 			$this->getSidebar();
 		}
 		$sidebar = session('sidebar');
-		
-		$activeRouter = $module.'/'.$controller.'/'.$action;
-
+	
 		$parent_id_1 = 0;
 		$parent_id_2 = 0;
 		$resource1 = \think\Db::name('auth_rule')->field('id,name,title,pid')->where('name',$activeRouter)->find();

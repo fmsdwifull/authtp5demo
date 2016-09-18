@@ -2,6 +2,7 @@
 namespace app\admin\controller;
 use think\Controller;
 use app\admin\api\UserApi;
+use Gregwar\Captcha\CaptchaBuilder;
 
 class Index extends Controller{
 	/**
@@ -22,7 +23,9 @@ class Index extends Controller{
 			if(!$code){
 				return $this->error('请填写验证码');
 			}
-			if(!captcha_check($code)){
+			$phrase = session('phrase');
+			session('phrase', null);
+			if($phrase != $code){
 				return $this->error('验证码错误');
 			}
 			if(!$username || !$password){
@@ -60,5 +63,12 @@ class Index extends Controller{
 		}else{
 			return view('index');
 		}
+	}
+
+	public function captcha()
+	{
+		$builder = new CaptchaBuilder;
+		$builder->build()->output();
+		session('phrase', $builder->getPhrase());
 	}
 }
