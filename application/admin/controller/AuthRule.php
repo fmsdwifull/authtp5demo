@@ -26,10 +26,10 @@ class AuthRule extends Base{
 	public function add(){
 		if(request()->isPost()){
 			$authRuleModel = new AuthRuleModel;
-			if($id = $authRuleModel->validate(true)->save(input('post.'))){
+			if($authRuleModel->validate(true)->save(input('post.'))){
 				// 给管理员添加全部权限
 				$authGroupData = \think\Db::name('auth_group')->field('rules')->where('id',1)->find();
-				$rules = $authGroupData['rules'] . ',' . $id;
+				$rules = $authGroupData['rules'] . ',' . $authRuleModel->id;
 				\think\Db::name('auth_group')->where('id',1)->update(['rules'=>$rules]);
 				$this->getSidebar();
 				session('_auth_list_'.session('user_auth')['uid'].'1', null);
@@ -93,20 +93,39 @@ class AuthRule extends Base{
 	 * @return   [type]                   [description]
 	 */
 	public function del(){
-		$id = input('?param.id') ? input('param.id') : '';
+		$id = input('?param.id') ? intval(input('param.id')) : '';
 		if(!$id){
 			return $this->error('参数错误');
 		}
 		if(in_array($id, explode(',', '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17'))){
-			return $this->error('改权限不允许编辑');
+			return $this->error('该权限不允许编辑');
 		}
-		if(\think\Db::name('auth_rule')->where('id',$id)->delete()){
-			$this->getSidebar();
-			session('_auth_list_'.session('user_auth')['uid'].'1', null);
-			return $this->success('删除成功');
-		}else{
-			return $this->error('删除失败');
+		$ids = [$id];
+
+		$child1 = \think\Db::table('auth_rule')->field('id')->where('pid',$id)->select();
+		if($child1){
+			foreach ($child1 as $key => $value) {
+				$ids[] = $value['id'];
+				$child2 = \think\Db::table('auth_rule')->field('id')->where('pid',$value['id'])->select();
+				if($child2){
+					foreach ($child2 as $k2 => $v2) {
+						$ids[] = $v2['id'];
+					}
+				}
+			}
 		}
+		
+		\think\Db::table('auth_rule')->where('id','in',$ids)->delete();
+
+		$rules = \think\Db::table('auth_group')->field('id,rules')->select();
+		foreach ($rules as $rule) {
+			$rulesArr = explode(',', $rule['rules']);
+			$rules = implode(',', array_diff($rulesArr, $ids));
+			\think\Db::table('auth_group')->where('id', $rule['id'])->update(['rules'=>$rules]);
+		}
+		$this->getSidebar();
+		session('_auth_list_'.session('user_auth')['uid'].'1', null);
+		return $this->success('删除成功');
 	}
 
 }
