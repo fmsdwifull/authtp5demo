@@ -10,7 +10,7 @@ class AuthRule extends Base{
 	 * @return   [type]                   [description]
 	 */
 	public function index(){
-		$authRuleData = \think\Db::query('select id,name,title,pid,sort,path,type,concat(path,"-",id) as bpath from auth_rule where status=1 order by bpath');
+		$authRuleData = \think\Db::query('select id,name,title,pid,sort,path,type,icon,concat(path,"-",id) as bpath from auth_rule where status=1 order by bpath');
 		foreach ($authRuleData as $key => $value) {
 			$authRuleData[$key]['count'] = count(explode('-', $value['path']));
 		}
