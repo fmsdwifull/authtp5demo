@@ -17,8 +17,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "topthink/framework": "*",
-        "topthink/think-captcha": "^1.0"
+        "gregwar/captcha": "^1.1"
     },
     "extra": {
         "think-path": "thinkphp"
