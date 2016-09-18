@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50547
 File Encoding         : 65001
 
-Date: 2016-09-18 12:05:03
+Date: 2016-09-18 18:18:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,7 +34,7 @@ CREATE TABLE `auth_group` (
 -- Records of auth_group
 -- ----------------------------
 INSERT INTO `auth_group` VALUES ('1', '管理员', '1', '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,1,20', '', '0', '1466780039');
-INSERT INTO `auth_group` VALUES ('6', '初级管理员', '1', '11,6', '初级管理员', '1466910557', '1466910596');
+INSERT INTO `auth_group` VALUES ('6', '初级管理员', '1', '6,1,2,13,3,4', '初级管理员', '1466910557', '1474193271');
 
 -- ----------------------------
 -- Table structure for auth_group_access
@@ -52,6 +52,8 @@ CREATE TABLE `auth_group_access` (
 -- Records of auth_group_access
 -- ----------------------------
 INSERT INTO `auth_group_access` VALUES ('1', '1');
+INSERT INTO `auth_group_access` VALUES ('1', '6');
+INSERT INTO `auth_group_access` VALUES ('12', '6');
 
 -- ----------------------------
 -- Table structure for auth_rule
@@ -190,10 +192,11 @@ CREATE TABLE `ucenter_member` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   KEY `status` (`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of ucenter_member
 -- ----------------------------
-INSERT INTO `ucenter_member` VALUES ('1', 'admin', '779d005fa526b871d424fcab8140582f', '296720094@qq.com', '18053449656', '0', '1474164800', '2130706433', '1', '0', '1474164800');
-INSERT INTO `ucenter_member` VALUES ('3', 'test123', '779d005fa526b871d424fcab8140582f', '', '', '127.0.0.1', '0', '0', '1', '1466910101', '1466910142');
+INSERT INTO `ucenter_member` VALUES ('1', 'admin', '779d005fa526b871d424fcab8140582f', '296720094@qq.com', '18053449656', '0', '1474193415', '2130706433', '1', '0', '1474193415');
+INSERT INTO `ucenter_member` VALUES ('3', 'test123', '779d005fa526b871d424fcab8140582f', '', '', '127.0.0.1', '1474193287', '2130706433', '1', '1466910101', '1474193287');
+INSERT INTO `ucenter_member` VALUES ('12', 'test', '779d005fa526b871d424fcab8140582f', '', '', '127.0.0.1', '0', '0', '1', '1474193837', '1474193837');
