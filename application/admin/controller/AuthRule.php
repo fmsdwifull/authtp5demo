@@ -75,7 +75,7 @@ class AuthRule extends Base{
 			if(!$id){
 				return $this->error('参数错误');
 			}
-			$data = \think\Db::name('auth_rule')->field('id,name,title,type,condition,pid,sort,is_show')->where('id',$id)->find();
+			$data = \think\Db::name('auth_rule')->field('id,name,title,type,condition,pid,sort,is_show,icon')->where('id',$id)->find();
 			$pidData = \think\Db::query('select id,title,path,concat(path,"-",id) as bpath from auth_rule where status=1 and type=1 and is_show=1 order by bpath');
 			foreach ($pidData as $key => $value) {
 				$pidData[$key]['count'] = count(explode('-', $value['path']));

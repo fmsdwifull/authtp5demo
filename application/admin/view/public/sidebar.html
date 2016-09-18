@@ -13,7 +13,7 @@
                     {volist name="sidebar" id="item"}
                     <li {if $parent_id_1 == $item['id'] || $parent_id_2 == $item['id']}class="open"{/if}>
                         <a href='{if !empty($item["name"])}{:url($item['name'])}{else}#{/if}' {if isset($item['child'])}class="menu-dropdown"{/if}>
-                            <i class="menu-icon fa fa-gear"></i>
+                            <i class="menu-icon {if !empty($item['icon'])}{$item['icon']}{else}fa fa-gear{/if}"></i>
 
                             <span class="menu-text">
                                 {$item['title']}

@@ -51,7 +51,7 @@ class Base extends Controller{
 	protected function getSidebar(){
 		$authGroupAccessData = \think\Db::name('auth_group_access')->field('group_id')->where('uid',session('user_auth')['uid'])->find();
 		$authGroupData = \think\Db::name('auth_group')->field('rules')->where('id',$authGroupAccessData['group_id'])->find();
-		$authRuleData = \think\Db::name('auth_rule')->field('id,name,title,pid,sort,path')->where('id','in',$authGroupData['rules'])->where('type',1)->where('status',1)->where('is_show',1)->order('path,sort asc')->select();
+		$authRuleData = \think\Db::name('auth_rule')->field('id,name,title,icon,pid,sort,path')->where('id','in',$authGroupData['rules'])->where('type',1)->where('status',1)->where('is_show',1)->order('path,sort asc')->select();
 		$sidebar = [];
 		foreach ($authRuleData as $key => $value) {
 			$path = explode('-', $value['path']);
