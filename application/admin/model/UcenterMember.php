@@ -54,7 +54,8 @@ class UcenterMember extends Model{
 			'mobile'   => $mobile,
 		);
 		/* 添加用户 */
-		if($uid = $this->validate(true)->save($data)){
+		if($this->validate(true)->save($data)){
+			$uid = $this->id;
 			return $uid ? $uid : 0; //0-未知错误，大于0-注册成功
 		} else {
 			return $this->getError(); //错误详情见自动验证注释
