@@ -8,8 +8,7 @@ class Base extends Controller{
 		if(!session('user_auth') || !session('user_auth_sign')){
 			$this->redirect(url('index/index'));
 		}
-
-		$activeRouter = $this->request->path();
+		$activeRouter = $this->request->dispatch['module']['0'] . '' . $this->request->dispatch['module'][1] . '' . $this->request->dispatch['module'][2];
 		$auth = new \com\Auth();
 		if(!$auth->check($activeRouter, session('user_auth')['uid'])){
 			return $this->error('没有权限',url('index/index'));
