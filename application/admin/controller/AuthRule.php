@@ -33,7 +33,7 @@ class AuthRule extends Base{
 				\think\Db::name('auth_group')->where('id',1)->update(['rules'=>$rules]);
 				$this->getSidebar();
 				session('_auth_list_'.session('user_auth')['uid'].'1', null);
-				return $this->success('添加成功',url('index'));
+				return $this->success('添加成功','index');
 			}else{
 				return $this->error($authRuleModel->getError());
 			}
@@ -66,7 +66,7 @@ class AuthRule extends Base{
 			if($authRuleModel->validate(true)->save(input('post.'), ['id'=>$id])){
 				$this->getSidebar();
 				session('_auth_list_'.session('user_auth')['uid'].'1', null);
-				return $this->success('修改成功',url('index'));
+				return $this->success('修改成功','index');
 			}else{
 				return $this->error($authRuleModel->getError());
 			}			

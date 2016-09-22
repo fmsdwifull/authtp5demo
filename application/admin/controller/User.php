@@ -11,7 +11,7 @@ class User extends Base{
 	 */
 	public function logout(){
 		session(null);
-		return $this->success('退出成功',url('index/index'));
+		return $this->success('退出成功','index/index');
 	}
 
 	/**
@@ -78,7 +78,7 @@ class User extends Base{
 			}
 			$group_id = input('?post.group_id') ? input('post.group_id') : '';
 			if(!$group_id){
-				return $this->error('请创建角色',url('auth_group/add'));
+				return $this->error('请创建角色','auth_group/add');
 			}
 			$user = new UserApi;
 			$res = $user->register($username, '123456');
@@ -88,7 +88,7 @@ class User extends Base{
 					'group_id'=>$group_id
 				];	
 				\think\Db::name('auth_group_access')->insert($insertData);
-				return $this->success('添加成功',url('index'));
+				return $this->success('添加成功','index');
 			}else{
 				return $this->error($res);
 			}
@@ -114,14 +114,14 @@ class User extends Base{
 			}
 			$group_id = input('?post.group_id') ? input('post.group_id') : '';
 			if(!$group_id){
-				return $this->error('请创建角色',url('auth_group/add'));
+				return $this->error('请创建角色','auth_group/add');
 			}
 			$user = new UserApi;
 			$data = ['username'=>input('post.username')];
 			$res = $user->updateInfoNotCheck($id, $data);
 			if($res['status']){
 				\think\Db::name('auth_group_access')->where('uid',$id)->update(['group_id'=>$group_id]);
-				return $this->success('修改成功',url('index'));
+				return $this->success('修改成功','index');
 			}else{
 				return $this->error($res['info']);
 			}

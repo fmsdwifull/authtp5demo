@@ -14,7 +14,7 @@ class Index extends Controller{
 	public function index(){
 		// 检测登录状态
 		if(session('user_auth') && session('user_auth_sign')){
-			$this->redirect(url('main/index'));
+			$this->redirect('main/index');
 		}
 		if(request()->isPost()){
 			$username = input('post.username');
@@ -44,7 +44,7 @@ class Index extends Controller{
 				];
 				session('user_auth',$auth);
 				session('user_auth_sign', data_auth_sign($auth));
-				return $this->success('登录成功',url('main/index'));
+				return $this->success('登录成功','main/index');
 			}else{
 				switch ($uid) {
 					case '-1':

@@ -24,7 +24,7 @@ class AuthGroup extends Base{
 		if(request()->isPost()){
 			$authGroupModel = new AuthGroupModel;
 			if($authGroupModel->validate(true)->save(input('post.'))){
-				return $this->success('添加成功',url('auth_group/index'));
+				return $this->success('添加成功','auth_group/index');
 			}else{
 				return $this->error($authGroupModel->getError());
 			}
@@ -47,7 +47,7 @@ class AuthGroup extends Base{
 				return $this->error('参数错误');
 			}
 			if($authGroupModel->validate(true)->save(input('post.'),['id'=>input('post.id')])){
-				return $this->success('修改成功',url('index'));
+				return $this->success('修改成功','index');
 			}else{
 				return $this->error('修改失败');
 			}

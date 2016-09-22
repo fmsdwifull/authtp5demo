@@ -6,15 +6,14 @@ class Base extends Controller{
 	public function _initialize(){
 		// 判断是否登录，没有登录跳转登录页面
 		if(!session('user_auth') || !session('user_auth_sign')){
-			$this->redirect(url('index/index'));
+			$this->redirect('index/index');
 		}
 		$dispatch = $this->request->dispatch();
 		$activeRouter = $dispatch['module']['0'] . '/' . $dispatch['module'][1] . '/' . $dispatch['module'][2];
 		$auth = new \com\Auth();
 		if(!$auth->check($activeRouter, session('user_auth')['uid'])){
-			return $this->error('没有权限',url('index/index'));
+			return $this->error('没有权限','index/index');
 		}
-
 		if(!session('sidebar')){
 			$this->getSidebar();
 		}
