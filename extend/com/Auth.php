@@ -164,7 +164,7 @@ class Auth{
             return $_authList[$uid.$t];
         }
 
-        if( $this->_config['auth_type']==2 && !empty(\think\Session::get('_auth_list_'.$uid.$t))){
+        if( $this->_config['auth_type']==2 && \think\Session::get('_auth_list_'.$uid.$t)){
             return \think\Session::get('_auth_list_'.$uid.$t);
         }
 

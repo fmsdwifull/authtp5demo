@@ -22,6 +22,6 @@ class AuthRule extends Model{
 	}
 
 	protected function setSortAttr(){
-		return empty(input('post.sort')) ? 0 : input('post.sort');
+		return input('?post.sort') ? input('post.sort') : 0;
 	}
 }
