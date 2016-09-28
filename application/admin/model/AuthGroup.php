@@ -13,4 +13,5 @@ class AuthGroup extends Model{
 		}
 		return $resource;
 	}
+
 }

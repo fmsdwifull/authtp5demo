@@ -68,4 +68,5 @@ class Base extends Controller{
 		}
 		session('sidebar',$sidebar);
 	}
+
 }

@@ -21,7 +21,7 @@ class User extends Base{
 	 * @return   [type]                   [description]
 	 */
 	public function changePwd(){
-		if(request()->isPost()){
+		if(request()->isPost() && input('post.')){
 			if(session('user_auth')['uid'] == 1){
 				return $this->error('禁止修改管理员密码');
 			}
@@ -71,7 +71,7 @@ class User extends Base{
 	 * @DateTime 2016-06-24T22:54:28+0800
 	 */
 	public function add(){
-		if(request()->isPost()){
+		if(request()->isPost() && input('post.')){
 			$username = input('?post.username') ? input('post.username') : '';
 			if(!$username){
 				return $this->error('请填写用户名');
@@ -107,7 +107,7 @@ class User extends Base{
 	 * @return   [type]                   [description]
 	 */
 	public function edit(){
-		if(request()->isPost()){
+		if(request()->isPost() && input('post.')){
 			$id = input('?post.id') ? input('post.id') : '';
 			if(!$id || $id==1){
 				return $this->error('参数错误');
