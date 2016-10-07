@@ -25,7 +25,6 @@ class AuthRule extends Base{
 	 */
 	public function add(){
 		if(request()->isPost() && input('post.')){
-			$this->checkValidate();
 			$authRuleModel = new AuthRuleModel;
 			if($authRuleModel->validate(true)->save(input('post.'))){
 				// 给管理员添加全部权限
