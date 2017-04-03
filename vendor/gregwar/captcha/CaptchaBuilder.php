@@ -526,7 +526,9 @@ class CaptchaBuilder implements CaptchaBuilderInterface
      */
     public function save($filename, $quality = 90)
     {
-        imagejpeg($this->contents, $filename, $quality);
+        //imagejpeg($this->contents, $filename, $quality);
+        imagepng($this->contents);
+
     }
 
     /**
@@ -561,7 +563,9 @@ class CaptchaBuilder implements CaptchaBuilderInterface
      */
     public function output($quality = 90)
     {
-        imagejpeg($this->contents, null, $quality);
+        //imagejpeg($this->contents, null, $quality);
+                imagepng($this->contents);
+
     }
 
     /**
